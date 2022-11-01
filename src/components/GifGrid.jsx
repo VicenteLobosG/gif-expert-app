@@ -1,21 +1,29 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getGifs } from "../helpers/getGifs"
 
 export const GifGrid = ({category}) => {
+    const [gifs, setGifs] = useState([]);
+    
+    const getImages = async () => {
+        const newGifs = await getGifs(category);
+        setGifs(newGifs)
+    }
+
     useEffect(() => {
-        getGifs(category);
+        getImages();
     }, []);
 
     return (
         <div>   
-            <li>{ category }
-            </li>
-            {/* { 
-                gifs.data.map( img => (
-                    <img src={img.source}/>
-                )) 
-            } */}
+            <h3>{ category }</h3>
             
+            <ol>
+                {
+                    gifs.map( ({ id, title }) => 
+                        <li key={ id }>{ title }</li>
+                    )
+                }
+            </ol>
         </div>
     )
 }
