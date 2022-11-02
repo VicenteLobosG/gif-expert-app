@@ -1,13 +1,17 @@
 import { useFetchGifs } from "../hooks/useFetchGifs";
 import { GifItem } from "./GifItem";
 
-export const GifGrid = ({category}) => {
+export const GifGrid = ({category, onDeleteCategory}) => {
     const {gifs, isLoading} = useFetchGifs(category);
-    console.log({ gifs, isLoading})
+
+    const handleDelete = (category) => {
+        onDeleteCategory(category)
+    }
 
     return (
-        <div>   
+        <div> 
             <h3>{ category }</h3>
+            <button onClick={() => handleDelete(category)}>Borrar Categoria</button>
 
             {
                 isLoading && ( <h2> Cargando... </h2> )

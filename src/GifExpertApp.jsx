@@ -11,6 +11,11 @@ export const GifExpertApp = () => {
         }
         setCategories([newCategory, ...categories]);
     }
+
+    const onRemoveCategory = (removeCategory) => {
+        const newCategories = categories.filter((cat) => cat !== removeCategory);
+        setCategories(newCategories);
+    }
     return (
         <>
             <h1> GifExpertApp </h1>
@@ -22,6 +27,7 @@ export const GifExpertApp = () => {
                     <GifGrid 
                         key={cat}
                         category={cat}
+                        onDeleteCategory={onRemoveCategory}
                     />
                 )) 
             }
